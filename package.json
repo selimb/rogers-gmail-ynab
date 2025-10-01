@@ -1,0 +1,30 @@
+{
+  "name": "rogers-gmail-ynab",
+  "version": "0.0",
+  "type": "module",
+  "scripts": {
+    "tsc": "tsc",
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write",
+    "eslint": "eslint . --max-warnings=0",
+    "eslint:fix": "npm run eslint -- --fix",
+    "lint": "npm run prettier && npm run tsc && npm run eslint",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix"
+  },
+  "dependencies": {
+    "ynab": "^2.10.0",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.4.0",
+    "@eslint/js": "^9.36.0",
+    "@inquirer/prompts": "^7.8.6",
+    "@types/node": "^24.6.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unicorn": "^61.0.2",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0"
+  }
+}

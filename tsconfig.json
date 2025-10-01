@@ -1,0 +1,28 @@
+{
+  "include": ["src/**/*.ts", "scripts/**/*.ts", "eslint.config.js"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    // Enable latest features
+    "lib": ["ES2022"],
+    "target": "ES2022",
+
+    // Output
+    "noEmit": true,
+
+    // Vanilla JS
+    "checkJs": true,
+    "allowJs": true,
+
+    // Module
+    // https://www.totaltypescript.com/tsconfig-cheat-sheet#not-transpiling-with-typescript
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true,
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}
