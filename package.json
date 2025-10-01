@@ -3,14 +3,15 @@
   "version": "0.0",
   "type": "module",
   "scripts": {
-    "build": "bun build src/main.ts --outdir=dist --target=browser --format=iife",
+    "build": "bun run scripts/build.ts",
     "tsc": "tsc",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
     "eslint": "eslint . --max-warnings=0",
     "eslint:fix": "npm run eslint -- --fix",
     "lint": "npm run prettier && npm run tsc && npm run eslint",
-    "lint:fix": "npm run prettier:fix && npm run eslint:fix"
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix",
+    "test": "bun test"
   },
   "dependencies": {
     "ynab": "^2.10.0",
@@ -20,6 +21,7 @@
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.36.0",
     "@inquirer/prompts": "^7.8.6",
+    "@types/bun": "^1.2.23",
     "@types/google-apps-script": "^2.0.4",
     "@types/node": "^24.6.1",
     "eslint": "^9.36.0",
