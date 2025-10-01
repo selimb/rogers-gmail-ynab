@@ -3,6 +3,7 @@
   "version": "0.0",
   "type": "module",
   "scripts": {
+    "build": "bun build src/main.ts --outdir=dist --target=browser --format=iife",
     "tsc": "tsc",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
@@ -19,6 +20,7 @@
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.36.0",
     "@inquirer/prompts": "^7.8.6",
+    "@types/google-apps-script": "^2.0.4",
     "@types/node": "^24.6.1",
     "eslint": "^9.36.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",

@@ -1,9 +1,9 @@
 {
   "include": ["src/**/*.ts", "scripts/**/*.ts", "eslint.config.js"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     // Enable latest features
-    "lib": ["ES2022"],
+    "lib": ["ES2022", "DOM"],
     "target": "ES2022",
 
     // Output

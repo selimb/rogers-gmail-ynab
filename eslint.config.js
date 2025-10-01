@@ -125,5 +125,5 @@ export default defineConfig(
         },
       ],
     },
-  }
+  },
 );

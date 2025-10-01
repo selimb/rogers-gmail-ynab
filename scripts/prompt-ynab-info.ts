@@ -1,7 +1,9 @@
 #!/usr/bin/env -S bun run
-import { z } from "zod";
-import ynab from "ynab";
 import * as inquirer from "@inquirer/prompts";
+import ynab from "ynab";
+import { z } from "zod";
+
+import type { Config } from "../src/config";
 
 const envSchema = z.object({
   YNAB_TOKEN: z.string().min(1),
@@ -35,15 +37,16 @@ const accountSelected = await inquirer.select({
   pageSize: accountChoices.length,
 });
 
-// XXX type
-const config = {
+const config: Config = {
   YNAB_TOKEN: env.YNAB_TOKEN,
   YNAB_BUDGET: budgetSelected.id,
   YNAB_ACCOUNT: accountSelected.id,
 };
+// eslint-disable-next-line no-console -- Not debugging.
 console.log(
-  "Copy-paste the following properties -- use `clasp open-api-console` to browse to settings page."
+  "Copy-paste the following properties -- use `clasp open-api-console` to browse to settings page.",
 );
 for (const [key, value] of Object.entries(config)) {
+  // eslint-disable-next-line no-console -- Not debugging.
   console.log(key, value);
 }

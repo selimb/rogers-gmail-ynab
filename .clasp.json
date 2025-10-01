@@ -1,7 +1,7 @@
 {
   "scriptId": "1d2mEa-TG14x7S1MXx-lfVn54OhbolqzOE5N71nHl_8OxgOQBxlQUX8O0",
   "projectId": "",
-  "rootDir": "",
+  "rootDir": "dist",
   "scriptExtensions": [".js", ".gs"],
   "htmlExtensions": [".html"],
   "jsonExtensions": [".json"],
