@@ -8,7 +8,7 @@
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     // GAS runtime doesn't support latest features.
-    "lib": ["ES2021", "DOM"],
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
     "target": "ES2016",
 
     // Output
