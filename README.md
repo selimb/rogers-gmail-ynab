@@ -15,3 +15,20 @@ Run the following to prompt for a YNAB budget and account:
 ```shell
 ./scripts/prompt-ynab-info.ts
 ```
+
+## Deploy
+
+```
+version=1.0
+# bump version in package.json
+git commit -am "v$version"
+git tag v$version
+git push
+git push --tags
+
+just push
+clasp version v$version
+# copy version number
+gas_version=XXX
+clasp deploy --versionNumber "$gas_version" --description "v$version"
+```
