@@ -1,6 +1,6 @@
-import * as ynab from "ynab";
-
 import { zConfig } from "./config";
+import { parseRogersEmail } from "./parser";
+import { YnabClient } from "./ynab";
 
 const GMAIL_LABEL_NAME = "automation/rogers-gmail-ynab";
 const PAGE_SIZE = 50;
@@ -13,10 +13,10 @@ export function rogers_to_ynab(): void {
     throw new Error(`Invalid YNAB config: ${ynabConfigResult.error.message}`);
   }
   const ynabConfig = ynabConfigResult.data;
-  const ynabClient = new ynab.API(ynabConfig.YNAB_TOKEN);
+  const ynabClient = new YnabClient(ynabConfig);
 
   const messages = GmailApp.search(
-    `label:${GMAIL_LABEL_NAME} in:inbox`,
+    `label:${GMAIL_LABEL_NAME} in:inbox -is:starred`,
     0,
     PAGE_SIZE,
   ).flatMap((thread) => thread.getMessages());
@@ -28,12 +28,34 @@ export function rogers_to_ynab(): void {
 
   for (const message of messages) {
     const body = message.getPlainBody();
-    // XXX
-    Logger.log(body);
-  }
+    const parsed = parseRogersEmail(body);
+    if (parsed instanceof Error) {
+      Logger.log(
+        `Failed to parse message. ${parsed.message}\nmessage:\n${body}`,
+      );
+      // XXX
+      // message.star();
+      continue;
+    }
 
-  // XXX
-  return;
+    Logger.log(`Parsed message: %s`, parsed);
+
+    try {
+      const _response = ynabClient.createTransaction({
+        date: parsed.date,
+        amount: parsed.amount,
+        payee_name: parsed.merchant,
+      });
+    } catch (error) {
+      Logger.log(`Failed to upload transaction for %s.\n%s`, parsed, error);
+      // XXX
+      // message.star();
+      continue;
+    }
+
+    // XXX
+    // message.moveToTrash();
+  }
 }
 
 Object.assign(globalThis, { rogers_to_ynab });
