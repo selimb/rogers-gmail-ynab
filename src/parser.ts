@@ -1,6 +1,5 @@
 export type ParsedRogersEmail = {
   merchant: string;
-  /** Amount, in milliunits. */
   amount: number;
   /** In YYYY-MM-DD format. */
   date: string;
@@ -21,9 +20,7 @@ export function parseRogersEmail(body: string): ParsedRogersEmail | Error {
 
   const [, amountRaw, dateRaw, merchantAndLocation] = match;
 
-  const amount = Number.parseFloat(
-    amountRaw.replaceAll(",", "").replaceAll(".", ""),
-  );
+  const amount = Number.parseFloat(amountRaw.replaceAll(",", ""));
   if (Number.isNaN(amount)) {
     return new Error(`Invalid amount: '${amountRaw}'.`);
   }

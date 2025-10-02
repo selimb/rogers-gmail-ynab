@@ -1,23 +1,21 @@
 import fs from "node:fs/promises";
 
-import { expect } from "bun:test";
+import { $ } from "bun";
 
 const ENTRY_FUNCTIONS = ["rogers_to_ynab"];
+const outPath = `dist/main.js`;
 
-const { outputs } = await Bun.build({
-  entrypoints: ["src/main.ts"],
-  outdir: "dist",
-  target: "browser",
-  format: "iife",
-});
+async function main(): Promise<void> {
+  await $`rollup --config`;
 
-expect(outputs.length).toBe(1);
-const outPath = outputs[0].path;
+  // HACK: This is hacky, but it's easier than messing with stupid bundler configs and plugins.
+  const lines = ENTRY_FUNCTIONS.flatMap((fn) => [
+    `function ${fn} () {`,
+    `  EXPORTS.${fn}();`,
+    `}`,
+  ]);
 
-const lines = ENTRY_FUNCTIONS.flatMap((fn) => [
-  `function ${fn} () {`,
-  `  globalThis.${fn};`,
-  `}`,
-]);
+  await fs.appendFile(outPath, "\n" + lines.join("\n") + "\n");
+}
 
-await fs.appendFile(outPath, "\n" + lines.join("\n") + "\n");
+void main();

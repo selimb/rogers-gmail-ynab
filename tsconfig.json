@@ -1,10 +1,15 @@
 {
-  "include": ["src/**/*.ts", "scripts/**/*.ts", "eslint.config.js"],
+  "include": [
+    "src/**/*.ts",
+    "scripts/**/*.ts",
+    "eslint.config.js",
+    "rollup.config.js"
+  ],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    // Enable latest features
-    "lib": ["ES2022", "DOM"],
-    "target": "ES2022",
+    // GAS runtime doesn't support latest features.
+    "lib": ["ES2021", "DOM"],
+    "target": "ES2016",
 
     // Output
     "noEmit": true,

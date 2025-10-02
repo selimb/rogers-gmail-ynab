@@ -33,8 +33,7 @@ export function rogers_to_ynab(): void {
       Logger.log(
         `Failed to parse message. ${parsed.message}\nmessage:\n${body}`,
       );
-      // XXX
-      // message.star();
+      message.star();
       continue;
     }
 
@@ -43,19 +42,16 @@ export function rogers_to_ynab(): void {
     try {
       const _response = ynabClient.createTransaction({
         date: parsed.date,
-        amount: parsed.amount,
+        // In milliunits
+        amount: parsed.amount * 1000,
         payee_name: parsed.merchant,
       });
     } catch (error) {
       Logger.log(`Failed to upload transaction for %s.\n%s`, parsed, error);
-      // XXX
-      // message.star();
+      message.star();
       continue;
     }
 
-    // XXX
-    // message.moveToTrash();
+    message.moveToTrash();
   }
 }
-
-Object.assign(globalThis, { rogers_to_ynab });
