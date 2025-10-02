@@ -1,6 +1,6 @@
 {
   "name": "rogers-gmail-ynab",
-  "version": "0.0",
+  "version": "1.0",
   "type": "module",
   "scripts": {
     "build": "bun run scripts/build.ts",
