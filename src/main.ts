@@ -42,8 +42,8 @@ export function rogers_to_ynab(): void {
     try {
       const _response = ynabClient.createTransaction({
         date: parsed.date,
-        // In milliunits
-        amount: parsed.amount * 1000,
+        // *1000 for milliunits, *-1 because it's an outflow, Math.round to avoid floating point issues
+        amount: Math.round(parsed.amount * 1000 * -1),
         payee_name: parsed.merchant,
       });
     } catch (error) {
