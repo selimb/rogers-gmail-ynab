@@ -38,6 +38,10 @@ export function rogers_to_ynab(): void {
     }
 
     Logger.log(`Parsed message: %s`, parsed);
+    if (message.isInTrash()) {
+      Logger.log(`Message is already in trash, skipping.`);
+      continue;
+    }
 
     try {
       const _response = ynabClient.createTransaction({
